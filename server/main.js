@@ -56,6 +56,9 @@ var bootstrapAddresses = function() {
         if (data.Postcode) {
           data.Postcode = data.Postcode.replace(" ", "");
         }
+        if (data.BuildingNumber){
+          data.BuildingNumber = parseInt(data.BuildingNumber);
+        }
         Addresses.insert(data)
       }))
       .on("end", Meteor.bindEnvironment(function() {

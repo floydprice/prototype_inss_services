@@ -6,7 +6,8 @@ Meteor.methods({
 });
 
 Addresses._ensureIndex({
-  "Postcode": "text"
+  "Postcode": "text",
+  "BuildingNumber": 1
 });
 
 Picker.route('/v1/postcodes/', function(params, req, res, next) {
@@ -18,6 +19,7 @@ Picker.route('/v1/postcodes/', function(params, req, res, next) {
         $options: 'i'
       }
     }, {
+      sort: {"BuildingNumber": 1, "BuildingName": 1},
       fields: {
         '_id': 0 // Don't need the mongo id
       },limit: 15
