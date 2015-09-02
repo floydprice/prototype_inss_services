@@ -53,7 +53,9 @@ var bootstrapAddresses = function() {
         ]
       }))
       .on("data", Meteor.bindEnvironment(function(data) {
-        data.Postcode = data.Postcode.replace(" ", "");
+        if (data.Postcode) {
+          data.Postcode = data.Postcode.replace(" ", "");
+        }
         Addresses.insert(data)
       }))
       .on("end", Meteor.bindEnvironment(function() {
