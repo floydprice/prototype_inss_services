@@ -20,11 +20,11 @@ See meteor.com/install
 
 **Now visit**
 
-Service Status : http://localhost:3000
+**Service Status** : http://localhost:3000
 
-PostCode Lookup : http://localhost:3000/v1/postcodes/?q=PL14PD
+**PostCode Lookup** : http://localhost:3000/v1/postcodes/?q=PL14PD
 
-Managed Parties: http://localhost:3000/v1/managed_parties/?q=bank
+**Managed Parties** : http://localhost:3000/v1/managed_parties/?q=bank
 
 
 **To Re-seed**
