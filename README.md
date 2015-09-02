@@ -14,9 +14,18 @@ See meteor.com/install
 
 **Step 2 - Clone repo and cd into directory**
 
-**Step 3**
-
-*run the meteor server
+**Step 3 - run the meteor server**
 
 >meteor
 
+**Now visit**
+
+Service Status : http://localhost:3000
+
+PostCode Lookup : http://localhost:3000/v1/postcodes/?q=PL14PD
+
+Managed Parties: http://localhost:3000/v1/managed_parties/?q=bank
+
+
+**To Re-seed**
+>meteor reset
