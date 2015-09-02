@@ -13,8 +13,9 @@ Picker.route('/v1/postcodes/', function(params, req, res, next) {
   res.setHeader('Content-Type', 'application/json');
   if (params.query.q) {
     var addresses = Addresses.find({
-      $text: {
-        $search: params.query.q.replace(" ", "")
+      "Postcode": {
+        $regex: params.query.q,
+        $options: 'i'
       }
     }, {
       fields: {
