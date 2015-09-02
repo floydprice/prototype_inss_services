@@ -6,7 +6,7 @@ Some prototype service written in NodeJS designed to seed data from CSV files (i
 
 *Mac and Linux*
 
-curl https://install.meteor.com/ | sh
+>curl https://install.meteor.com/ | sh
 
 *Windows*
 
