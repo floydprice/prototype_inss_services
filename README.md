@@ -2,6 +2,8 @@
 
 Some prototype service written in NodeJS designed to seed data from CSV files (in the data directory).
 
+# Installation
+
 **Step 1 - Install Meteor**
 
 *Mac and Linux*
@@ -18,7 +20,7 @@ See meteor.com/install
 
 >meteor
 
-**Now visit**
+# Availible Services
 
 **Service Status** : http://localhost:3000
 
@@ -27,5 +29,10 @@ See meteor.com/install
 **Managed Parties** : http://localhost:3000/v1/managed_parties/?q=bank
 
 
-**To Re-seed**
+# Re-seeding the database
+
+*If you have updated on of the data files you can simple reset the database and the app will automatically re-seed upon restart*
+
 >meteor reset
+
+>meteor
