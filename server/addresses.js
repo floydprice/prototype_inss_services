@@ -5,10 +5,17 @@ Meteor.methods({
   }
 });
 
-Addresses._ensureIndex({
-  "Postcode": "text",
-  "BuildingNumber": 1
-});
+try {
+  Addresses._ensureIndex({
+    "Postcode": "text",
+    "BuildingNumber": 1
+  });
+} catch (e) {
+
+} finally {
+
+}
+
 
 Picker.route('/v1/postcodes/', function(params, req, res, next) {
   res.setHeader('Content-Type', 'application/json');

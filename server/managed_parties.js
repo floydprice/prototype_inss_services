@@ -3,11 +3,15 @@ Meteor.methods({
      return ManagedParties.find().count();
   }
 });
+try {
+  ManagedParties._ensureIndex({
+    "Name": "text"
+  });
+} catch (e) {
 
-ManagedParties._ensureIndex({
-  "Name": "text"
-});
+} finally {
 
+}
 Picker.route('/v1/managed_parties/', function(params, req, res, next) {
   res.setHeader('Content-Type', 'application/json');
   if (params.query.q) {
