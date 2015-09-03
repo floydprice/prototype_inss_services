@@ -1,14 +1,23 @@
 var fs = Meteor.npmRequire('fs');
 var csv = Meteor.npmRequire('fast-csv');
-var path = process.env.PWD + '/data/managed_parties.csv';
-var pathAddresses = process.env.PWD + '/data/CSV_PAF.csv';
+var path = process.env.PWD + (process.env.NODE_ENV === 'development' ? '/public/data/managed_parties.csv':'/app/programs/web.browser/app/data/managed_parties.csv');
+var pathAddresses = process.env.PWD + (process.env.NODE_ENV === 'development' ? '/public/data/CSV_PAF.csv':'/app/programs/web.browser/app/data/CSV_PAF.csv');
 
 Meteor.startup(function() {
-  bootstrapManagedParties();
-  bootstrapAddresses();
+
 
 });
 
+Meteor.methods({
+  reSeedAddresses: function() {
+    Addresses.remove({})
+    bootstrapAddresses();
+  },
+  reSeedParties: function() {
+    ManagedParties.remove({}  );
+    bootstrapManagedParties();
+  }
+});
 
 var bootstrapManagedParties = function() {
   if (ManagedParties.find().count() === 0) {
@@ -56,7 +65,7 @@ var bootstrapAddresses = function() {
         if (data.Postcode) {
           data.Postcode = data.Postcode.replace(" ", "");
         }
-        if (data.BuildingNumber){
+        if (data.BuildingNumber) {
           data.BuildingNumber = parseInt(data.BuildingNumber);
         }
         Addresses.insert(data)
