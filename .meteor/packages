@@ -11,3 +11,4 @@ meteorhacks:npm
 npm-container
 meteorhacks:picker
 simple:reactive-method
+meteorhacks:cluster
