@@ -12,6 +12,7 @@ endef
 BUILD_NUMBER ?= 0
 .PHONY: artefact
 artefact:
+	rm -rf *.tar.gz
 	meteor build .
-	mv prototype_inss_services.tar.gz ubuntu-services_$(BUILD_NUMBER).tar.gz
+	mv *.tar.gz ubuntu-services_$(BUILD_NUMBER).tar.gz
 	$(call green,"[Create versioned artefact for Ubuntu Services]")
