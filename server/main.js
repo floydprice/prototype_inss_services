@@ -1,6 +1,7 @@
 var fs = Meteor.npmRequire('fs');
 var csv = Meteor.npmRequire('fast-csv');
-var path = process.env.PWD + (process.env.NODE_ENV === 'development' ? '/public/data/managed_parties.csv':'/app/programs/web.browser/app/data/managed_parties.csv');
+var pathBKT = process.env.PWD + (process.env.NODE_ENV === 'development' ? '/public/data/bkt_managed_parties.csv':'/app/programs/web.browser/app/data/bkt_managed_parties.csv');
+var pathDRO = process.env.PWD + (process.env.NODE_ENV === 'development' ? '/public/data/dro_managed_parties.csv':'/app/programs/web.browser/app/data/dro_managed_parties.csv');
 var pathAddresses = process.env.PWD + (process.env.NODE_ENV === 'development' ? '/public/data/CSV_PAF.csv':'/app/programs/web.browser/app/data/CSV_PAF.csv');
 
 Meteor.startup(function() {
@@ -13,25 +14,47 @@ Meteor.methods({
     Addresses.remove({})
     bootstrapAddresses();
   },
-  reSeedParties: function() {
-    ManagedParties.remove({}  );
-    bootstrapManagedParties();
+  reSeedBKTParties: function() {
+    BKTManagedParties.remove({}  );
+    bootstrapBKTManagedParties();
+  },
+  reSeedDROParties: function() {
+    DROManagedParties.remove({}  );
+    bootstrapDROManagedParties();
   }
 });
 
-var bootstrapManagedParties = function() {
-  if (ManagedParties.find().count() === 0) {
-    console.log("Starting to import Managed Parties")
-    fs.createReadStream(path)
+var bootstrapBKTManagedParties = function() {
+  if (BKTManagedParties.find().count() === 0) {
+    console.log("Starting to import BKT Managed Parties")
+    fs.createReadStream(pathBKT)
       .pipe(csv({
         headers: true
       }))
       .on("data", Meteor.bindEnvironment(function(data) {
         //console.log("Inserting party into collection: ", data);
-        ManagedParties.insert(data)
+        BKTManagedParties.insert(data)
       }))
       .on("end", Meteor.bindEnvironment(function() {
-        console.log("Completed importing managed parties");
+        console.log("Completed importing BKT managed parties");
+      }));
+  }
+};
+
+
+var bootstrapDROManagedParties = function() {
+  if (DROManagedParties.find().count() === 0) {
+    console.log("Starting to import DRO Managed Parties")
+    fs.createReadStream(pathDRO)
+      .pipe(csv({
+        headers: true
+      }))
+      .on("data", Meteor.bindEnvironment(function(data) {
+        //console.log("Inserting party into collection: ", data);
+        DROManagedParties.insert(data)
+      }))
+      .on("end", Meteor.bindEnvironment(function() {
+        console.log("Completed importing DRO managed parties");
       }));
   }
 };

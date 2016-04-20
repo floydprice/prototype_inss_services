@@ -1,10 +1,10 @@
 Meteor.methods({
-  totalPartyCount:function(){
-     return ManagedParties.find().count();
+  totalDROPartyCount:function(){
+     return DROManagedParties.find().count();
   }
 });
 try {
-  ManagedParties._ensureIndex({
+  DROManagedParties._ensureIndex({
     "Name": "text"
   });
 } catch (e) {
@@ -12,10 +12,10 @@ try {
 } finally {
 
 }
-Picker.route('/v1/managed_parties/', function(params, req, res, next) {
+Picker.route('/v1/dro_managed_parties/', function(params, req, res, next) {
   res.setHeader('Content-Type', 'application/json');
   if (params.query.q) {
-    var parties = ManagedParties.find({
+    var parties = DROManagedParties.find({
       "Name": {
         $regex: params.query.q,
         $options: 'i'
@@ -29,7 +29,7 @@ Picker.route('/v1/managed_parties/', function(params, req, res, next) {
     res.statusCode = 200;
     res.end(JSON.stringify(parties));
   } else if (params.query.id){
-	var results = ManagedParties.find(
+	var results = DROManagedParties.find(
 	{
 		"SourceRef": params.query.id
 	}, {
