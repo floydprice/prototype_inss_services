@@ -5,8 +5,8 @@ var pathDRO = process.env.PWD + (process.env.NODE_ENV === 'development' ? '/publ
 var pathAddresses = process.env.PWD + (process.env.NODE_ENV === 'development' ? '/public/data/CSV_PAF.csv':'/app/programs/web.browser/app/data/CSV_PAF.csv');
 
 Meteor.startup(function() {
-
-
+    Meteor.call("reSeedBKTParties");
+    Meteor.call("reSeedDROParties");
 });
 
 Meteor.methods({
