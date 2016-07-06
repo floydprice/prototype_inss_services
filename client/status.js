@@ -1,8 +1,12 @@
-Meteor.subscribe("ManagedParties");
+Meteor.subscribe("BKTManagedParties");
+Meteor.subscribe("DROManagedParties");
 Meteor.subscribe("Addresses");
 Template.main.helpers({
-  partyCount: function() {
-    return ReactiveMethod.call("totalPartyCount");
+  partyBKTCount: function() {
+    return ReactiveMethod.call("totalBKTPartyCount");
+  },
+  partyDROCount: function() {
+    return ReactiveMethod.call("totalDROPartyCount");
   },
   addressCount: function() {
     return ReactiveMethod.call("totalAddressCount");
@@ -16,10 +20,10 @@ Template.main.events({
       alert("Started, give it a while.");
     }
   },
-  "click #reSeedParties": function(event, template) {
-    if (confirm("Doing this will remove all the exisitng data and reseed against the data file, it might take a while... are you sure?")) {
-      Meteor.call("reSeedParties");
-      alert("Started, give it a while.");
-    }
+  "click #reSeedBKTParties": function(event, template) {
+      Meteor.call("reSeedBKTParties");
+  },
+  "click #reSeedDROParties": function(event, template) {
+      Meteor.call("reSeedDROParties");
   }
 });
