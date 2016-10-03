@@ -15,9 +15,11 @@ try {
 Picker.route('/v1/dro_managed_parties/', function(params, req, res, next) {
   res.setHeader('Content-Type', 'application/json');
   if (params.query.q) {
+    var escapedQuery = params.query.q.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+
     var parties = DROManagedParties.find({
       "Name": {
-        $regex: params.query.q,
+        $regex: escapedQuery,
         $options: 'i'
       }
     }, {
@@ -37,7 +39,7 @@ Picker.route('/v1/dro_managed_parties/', function(params, req, res, next) {
         '_id': 0 // Don't need the mongo id
       }
     }).fetch();
-	
+
 	if (results.length === 1)
 	{
 	   res.statusCode = 200;
